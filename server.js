@@ -30,7 +30,7 @@ app.post('/api/crear-testimonio', async (req, res) => {
       nombre: req.body.nombre,
       descripcion: req.body.descripcion
     };
-    await db.collection('testimonios-team-b').add(testimonio);
+    await db.collection('testimonios-team-a').add(testimonio);
     res.json({ message: 'Testimonio creado exitosamente.' });
   } catch (error) {
     console.error(error);
@@ -41,7 +41,7 @@ app.post('/api/crear-testimonio', async (req, res) => {
 // Ruta para obtener todos los testimonios
 app.get('/api/obtener-testimonios', async (req, res) => {
   try {
-    const testimoniosSnapshot = await db.collection('testimonios-team-b').get();
+    const testimoniosSnapshot = await db.collection('testimonios-team-a').get();
     const testimonios = testimoniosSnapshot.docs.map(doc => doc.data());
     res.json(testimonios);
   } catch (error) {
@@ -56,7 +56,7 @@ app.put('/api/actualizar-testimonio/:id', async (req, res) => {
     const testimonioId = req.params.id
     const { nombre, descripcion } = req.body
 
-    const testimonioRef = db.collection('testimonios-team-b').where('id', '==', testimonioId);
+    const testimonioRef = db.collection('testimonios-team-a').where('id', '==', testimonioId);
     const testimonioSnapshot = await testimonioRef.get();
 
     if (testimonioSnapshot.empty) {
@@ -77,7 +77,7 @@ app.put('/api/actualizar-testimonio/:id', async (req, res) => {
 app.delete('/api/eliminar-testimonio/:id', async (req, res) => {
   try {
     const testimonioId = req.params.id
-    const testimonioRef = db.collection('testimonios-team-b').where('id', '==', testimonioId);
+    const testimonioRef = db.collection('testimonios-team-a').where('id', '==', testimonioId);
     const testimonioSnapshot = await testimonioRef.get();
 
     if (testimonioSnapshot.empty) {
@@ -96,7 +96,7 @@ app.delete('/api/eliminar-testimonio/:id', async (req, res) => {
 
 
 // Iniciar servidor
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Servidor iniciado en http://localhost:${port}`);
 });
