@@ -5,7 +5,7 @@ const admin = require('firebase-admin');
 const { v4: uuidv4 } = require('uuid');
 
 // Configurar Firebase
-const serviceAccount = require('./.firebaseConfig.json'); // archivo JSON de credenciales de Firebase
+const serviceAccount = require('./firebaseConfig.json'); // archivo JSON de credenciales de Firebase
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -56,7 +56,7 @@ app.put('/api/actualizar-testimonio/:id', async (req, res) => {
   try {
     const testimonioId = req.params.id
     // Ups parece que la línea de abajo es muy importante
-    const { nombre, descripcion, socialUrl } = req.body
+    //const { nombre, descripcion, socialUrl } = req.body
 
     const testimonioRef = db.collection('testimonios-team-a').where('id', '==', testimonioId);
     const testimonioSnapshot = await testimonioRef.get();
