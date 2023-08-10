@@ -42,7 +42,7 @@ app.post('/api/crear-testimonio', async (req, res) => {
 // Ruta para obtener todos los testimonios
 app.get('/api/obtener-testimonios', async (req, res) => {
   try {
-    const testimoniosSnapshot = await db.collection('testimonios-team-a').orderBy("nombre", "asc").get();
+    const testimoniosSnapshot = await db.collection('testimonios-team-a').get();
     const testimonios = testimoniosSnapshot.docs.map(doc => doc.data());
     res.json(testimonios);
   } catch (error) {
