@@ -55,8 +55,8 @@ app.get('/api/obtener-testimonios', async (req, res) => {
 app.put('/api/actualizar-testimonio/:id', async (req, res) => {
   try {
     const testimonioId = req.params.id
-    // Ups parece que la línea de abajo es muy importante
-    //const { nombre, descripcion, socialUrl } = req.body
+    //Aqui estaba el error
+    const { nombre, descripcion, socialUrl } = req.body
 
     const testimonioRef = db.collection('testimonios-team-a-agosto').where('id', '==', testimonioId);
     const testimonioSnapshot = await testimonioRef.get();
