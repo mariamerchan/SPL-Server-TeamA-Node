@@ -31,7 +31,7 @@ app.post('/api/crear-testimonio', async (req, res) => {
       descripcion: req.body.descripcion,
       socialUrl: req.body.socialUrl
     };
-    await db.collection('testimonios-team-a-noviembre').add(testimonio);
+    await db.collection('testimonios-team-a-abril-2024').add(testimonio);
     res.json({ message: 'Testimonio creado exitosamente.' });
   } catch (error) {
     console.error(error);
@@ -42,7 +42,7 @@ app.post('/api/crear-testimonio', async (req, res) => {
 // Ruta para obtener todos los testimonios
 app.get('/api/obtener-testimonios', async (req, res) => {
   try {
-    const testimoniosSnapshot = await db.collection('testimonios-team-a-noviembre').get();
+    const testimoniosSnapshot = await db.collection('testimonios-team-a-abril-2024').get();
     const testimonios = testimoniosSnapshot.docs.map(doc => doc.data());
     res.json(testimonios);
   } catch (error) {
@@ -55,10 +55,10 @@ app.get('/api/obtener-testimonios', async (req, res) => {
 app.put('/api/actualizar-testimonio/:id', async (req, res) => {
   try {
     const testimonioId = req.params.id
-    // Ups parece que la línea de abajo es muy importante
+    // Ups parece que la línea de abajo esta comentada y es muy importante
     //const { nombre, descripcion, socialUrl } = req.body
 
-    const testimonioRef = db.collection('testimonios-team-a-noviembre').where('id', '==', testimonioId);
+    const testimonioRef = db.collection('testimonios-team-a-abril-2024').where('id', '==', testimonioId);
     const testimonioSnapshot = await testimonioRef.get();
 
     if (testimonioSnapshot.empty) {
@@ -79,7 +79,7 @@ app.put('/api/actualizar-testimonio/:id', async (req, res) => {
 app.delete('/api/eliminar-testimonio/:id', async (req, res) => {
   try {
     const testimonioId = req.params.id
-    const testimonioRef = db.collection('testimonios-team-a-noviembre').where('id', '==', testimonioId);
+    const testimonioRef = db.collection('testimonios-team-a-abril-2024').where('id', '==', testimonioId);
     const testimonioSnapshot = await testimonioRef.get();
 
     if (testimonioSnapshot.empty) {
